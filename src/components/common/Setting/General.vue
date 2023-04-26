@@ -5,9 +5,10 @@ import type { Language, Theme } from '@/store/modules/app/helper'
 import { SvgIcon } from '@/components/common'
 import { useAppStore, useUserStore } from '@/store'
 import type { UserInfo } from '@/store/modules/user/helper'
-import { getCurrentDate } from '@/utils/functions'
+import { delCookie, getCookie, getCurrentDate } from '@/utils/functions'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from '@/locales'
+import { logout } from '@/api'
 
 const appStore = useAppStore()
 const userStore = useUserStore()
@@ -69,6 +70,28 @@ function handleReset() {
   userStore.resetUserInfo()
   ms.success(t('common.success'))
   window.location.reload()
+}
+
+async function logoutt() {
+  try {
+    const token = getCookie('token')
+    const { code, message } = await logout(token)
+    if (code === 200) {
+      delCookie('token')
+      ms.success('登出成功')
+    }
+    else {
+      ms.error(message ?? '登出失败')
+    }
+  }
+  catch (error: any) {
+    ms.error(error.message ?? 'error')
+  }
+  finally {
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
+  }
 }
 
 function exportData(): void {
@@ -214,9 +237,9 @@ function handleImportButtonClick(): void {
         </div>
       </div>
       <div class="flex items-center space-x-4">
-        <span class="flex-shrink-0 w-[100px]">{{ $t('setting.resetUserInfo') }}</span>
-        <NButton size="small" @click="handleReset">
-          {{ $t('common.reset') }}
+        <span class="flex-shrink-0 w-[100px]">退出登录</span>
+        <NButton size="medium" type="error" @click="logoutt">
+          登出
         </NButton>
       </div>
     </div>

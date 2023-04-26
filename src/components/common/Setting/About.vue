@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { computed, onMounted, ref } from 'vue'
 import { NSpin } from 'naive-ui'
-import { fetchChatConfig } from '@/api'
+import { fetchChatUsage } from '@/api'
 import pkg from '@/../package.json'
 import { useAuthStore } from '@/store'
 
@@ -22,10 +22,10 @@ const config = ref<ConfigState>()
 
 const isChatGPTAPI = computed<boolean>(() => !!authStore.isChatGPTAPI)
 
-async function fetchConfig() {
+async function fetchUsage() {
   try {
     loading.value = true
-    const { data } = await fetchChatConfig<ConfigState>()
+    const { data } = await fetchChatUsage<ConfigState>()
     config.value = data
   }
   finally {
@@ -34,7 +34,7 @@ async function fetchConfig() {
 }
 
 onMounted(() => {
-  fetchConfig()
+  fetchUsage()
 })
 </script>
 

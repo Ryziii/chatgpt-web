@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { setupPageGuard } from './permission'
 import { ChatLayout } from '@/views/chat/layout'
 
@@ -17,6 +17,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/chat/index.vue'),
       },
     ],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/chat/components/Login/index.vue'),
+  },
+  {
+    path: '/lo',
+    name: 'lo',
+    component: () => import('@/views/chat/components/Login/ind.vue'),
   },
 
   {
@@ -39,7 +49,8 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export const router = createRouter({
-  history: createWebHashHistory(),
+  // history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })

@@ -14,6 +14,7 @@ export interface HttpOption {
 }
 
 export interface Response<T = any> {
+  code: T
   data: T
   message: string | null
   status: string
@@ -24,6 +25,9 @@ function http<T = any>(
 ) {
   const successHandler = (res: AxiosResponse<Response<T>>) => {
     const authStore = useAuthStore()
+
+    if (res.data.code != null && res.data.code !== 200)
+      throw res.data
 
     if (res.data.status === 'Success' || typeof res.data === 'string')
       return res.data
@@ -38,7 +42,7 @@ function http<T = any>(
 
   const failHandler = (error: Response<Error>) => {
     afterRequest?.()
-    throw new Error(error?.message || 'Error')
+    throw error
   }
 
   beforeRequest?.()

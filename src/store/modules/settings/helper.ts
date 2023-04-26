@@ -28,3 +28,16 @@ export function setLocalState(setting: SettingsState): void {
 export function removeLocalState() {
   ss.remove(LOCAL_NAME)
 }
+
+export function getRemoteState(): SettingsState {
+  const localSetting: SettingsState | undefined = ss.get(LOCAL_NAME)
+  return { ...defaultSetting(), ...localSetting }
+}
+
+export function setRemoteState(setting: SettingsState): void {
+  ss.set(LOCAL_NAME, setting)
+}
+
+export function removeRemoteState() {
+  ss.remove(LOCAL_NAME)
+}

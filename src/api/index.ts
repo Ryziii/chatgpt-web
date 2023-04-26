@@ -1,5 +1,6 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
 import { post } from '@/utils/request'
+import type { SettingsState } from '@/store/modules/settings/helper'
 import { useAuthStore, useSettingStore } from '@/store'
 
 export function fetchChatAPI<T = any>(
@@ -17,6 +18,12 @@ export function fetchChatAPI<T = any>(
 export function fetchChatConfig<T = any>() {
   return post<T>({
     url: '/config',
+  })
+}
+
+export function fetchChatUsage<T = any>() {
+  return post<T>({
+    url: '/usage',
   })
 }
 
@@ -62,5 +69,43 @@ export function fetchVerify<T>(token: string) {
   return post<T>({
     url: '/verify',
     data: { token },
+  })
+}
+export function saveUserInfo<T>(token: string) {
+  return post<T>({
+    url: '/saveUserInfo',
+    data: { token },
+  })
+}
+export function saveUserAdvinceSetting<T = any>(
+  token: string,
+  settings: Partial<SettingsState>,
+) {
+  return post<T>({
+    url: '/saveUserAdvinceSetting',
+    data: { token, settings },
+  })
+}
+
+export function login<T = any>(
+  username: string,
+  password: string,
+) {
+  return post<T>({
+    url: '/login',
+    data: { username, password },
+  })
+}
+export function logout<T = any>(
+  token: string | null,
+) {
+  return post<T>({
+    url: '/logout',
+    data: { token },
+  })
+}
+export function fetchAuth<T>() {
+  return post<T>({
+    url: '/auth',
   })
 }

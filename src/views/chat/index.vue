@@ -191,7 +191,7 @@ async function onConversation() {
       dataSources.value.length - 1,
       {
         dateTime: new Date().toLocaleString(),
-        text: errorMessage,
+        text: `[${errorMessage}]`,
         inversion: false,
         error: true,
         loading: false,
