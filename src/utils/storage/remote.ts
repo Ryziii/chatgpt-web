@@ -41,10 +41,6 @@ export function saveUserData() {
     window.localStorage.removeItem(key)
   }
 
-  function clear() {
-    // Deprecated
-    window.localStorage.clear()
-  }
 
   return {
     setUserAdvinceSetting,

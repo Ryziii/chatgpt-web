@@ -66,12 +66,6 @@ function updateUserInfo(options: Partial<UserInfo>) {
   ms.success(t('common.success'))
 }
 
-function handleReset() {
-  userStore.resetUserInfo()
-  ms.success(t('common.success'))
-  window.location.reload()
-}
-
 async function logoutt() {
   try {
     const token = getCookie('token')

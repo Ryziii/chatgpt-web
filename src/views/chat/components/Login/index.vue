@@ -21,7 +21,7 @@ const rules = {
   password: { required: true, message: '', trigger: 'blur' },
 }
 const router = useRouter()
-const handleSubmit = (e: MouseEvent) => {
+const handleSubmit = (e: MouseEvent | KeyboardEvent) => {
   e.preventDefault()
   formRef.value.validate(async (errors: any) => {
     if (!errors) {

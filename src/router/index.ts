@@ -23,11 +23,6 @@ const routes: RouteRecordRaw[] = [
     name: 'login',
     component: () => import('@/views/chat/components/Login/index.vue'),
   },
-  {
-    path: '/lo',
-    name: 'lo',
-    component: () => import('@/views/chat/components/Login/ind.vue'),
-  },
 
   {
     path: '/404',
