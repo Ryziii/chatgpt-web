@@ -178,7 +178,7 @@ async function onConversation() {
         +uuid,
         dataSources.value.length - 1,
         {
-          text: `${currentChat.text}\n[${errorMessage}]`,
+          text: `${currentChat.text}\n出错啦：[${errorMessage}]`,
           error: false,
           loading: false,
         },
@@ -191,7 +191,7 @@ async function onConversation() {
       dataSources.value.length - 1,
       {
         dateTime: new Date().toLocaleString(),
-        text: `[${errorMessage}]`,
+        text: `出错啦：[${errorMessage}]`,
         inversion: false,
         error: true,
         loading: false,
@@ -303,7 +303,7 @@ async function onRegenerate(index: number) {
       index,
       {
         dateTime: new Date().toLocaleString(),
-        text: errorMessage,
+        text: `出错啦：[${errorMessage}]`,
         inversion: false,
         error: true,
         loading: false,
