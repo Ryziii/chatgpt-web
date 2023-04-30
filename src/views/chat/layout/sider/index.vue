@@ -1,25 +1,40 @@
 <script setup lang='ts'>
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch } from 'vue'
-import { NButton, NLayoutSider } from 'naive-ui'
+import { NButton, NLayoutSider, useMessage } from 'naive-ui'
 import List from './List.vue'
 import Footer from './Footer.vue'
 import { useAppStore, useChatStore } from '@/store'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { PromptStore } from '@/components/common'
+import { fetchAddRoom } from '@/api'
 
 const appStore = useAppStore()
 const chatStore = useChatStore()
+const ms = useMessage()
 
 const { isMobile } = useBasicLayout()
 const show = ref(false)
 
 const collapsed = computed(() => appStore.siderCollapsed)
 
-function handleAdd() {
-  chatStore.addHistory({ title: 'New Chat', uuid: Date.now(), isEdit: false })
-  if (isMobile.value)
-    appStore.setSiderCollapsed(true)
+async function handleAdd() {
+  try {
+    const { code, message, data } = await fetchAddRoom()
+    if (code === 200) {
+      const typeData = data as { Id: number }
+      chatStore.addHistory({ title: 'New Chat', uuid: typeData.Id, isEdit: false })
+      if (isMobile.value)
+        appStore.setSiderCollapsed(true)
+    }
+    else {
+      ms.error(message ?? '新建聊天失败')
+    }
+  }
+  catch (error: any) {
+    // if (error.code === 500)
+    ms.error(error.message ?? '新建聊天失败')
+  }
 }
 
 function handleUpdateCollapsed() {

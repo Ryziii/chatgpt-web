@@ -109,3 +109,8 @@ export function fetchAuth<T>() {
     url: '/auth',
   })
 }
+export function fetchAddRoom<T>() {
+  return post<T>({
+    url: '/add-chat-room',
+  })
+}
