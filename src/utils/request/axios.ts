@@ -23,24 +23,6 @@ const renderMessage: MessageRenderMessage = (props) => {
     },
   )
 }
-const serverErrorMessage: MessageRenderMessage = (props) => {
-  const { type } = props
-  return h(
-    NAlert,
-    {
-      type: type === 'loading' ? 'default' : type,
-      title: '服务器出现错误',
-      style: {
-        boxShadow: 'var(--n-box-shadow)',
-        maxWidth: 'calc(100vw - 32px)',
-        width: '480px',
-      },
-    },
-    {
-      default: () => props.content,
-    },
-  )
-}
 
 const { message } = createDiscreteApi(
   ['message'],
@@ -75,12 +57,6 @@ service.interceptors.response.use(
         onAfterLeave: () => {
           window.location.href = '/login'
         },
-        duration: 2500,
-      })
-    }
-    if (error.response.status === 500) {
-      message.error(`${error.response.data}`, {
-        render: serverErrorMessage,
         duration: 2500,
       })
     }
