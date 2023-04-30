@@ -16,9 +16,6 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emit>()
 
-const isChatGPTAPI = true
-// computed<boolean>(() => !!authStore.isChatGPTAPI)
-
 const active = ref('General')
 
 const show = computed({

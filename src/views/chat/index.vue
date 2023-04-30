@@ -197,8 +197,8 @@ async function onConversation() {
         inversion: false,
         error: true,
         loading: false,
-        conversationOptions: null,
-        requestOptions: { prompt: message, options: { ...options } },
+        conversationOptions: {},
+        requestOptions: { prompt: message, options: { conversationId: undefined, roomId: options.roomId } },
       },
     )
     scrollToBottomIfAtBottom()

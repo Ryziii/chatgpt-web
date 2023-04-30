@@ -41,10 +41,12 @@ const handleSubmit = (e: MouseEvent | KeyboardEvent) => {
           router.replace('/chat')
         }
         else {
+          message.destroyAll()
           message.error(msg || '登录失败')
         }
       }
       catch {
+        message.destroyAll()
         message.error('登录失败')
       }
       finally {
