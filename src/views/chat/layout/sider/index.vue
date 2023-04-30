@@ -32,7 +32,6 @@ async function handleAdd() {
     }
   }
   catch (error: any) {
-    // if (error.code === 500)
     ms.error(error.message ?? '新建聊天失败')
   }
 }

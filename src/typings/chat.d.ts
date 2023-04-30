@@ -24,6 +24,7 @@ declare namespace Chat {
 	}
 
 	interface ConversationRequest {
+		roomId?: string
 		conversationId?: string
 		parentMessageId?: string
 	}
